@@ -14,10 +14,10 @@ import React, {
   View,
 } from 'react-native';
 
-var API_KEY = '7waqfqbprs7pajbz28mqf6vz';
-var API_URL = 'http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json';
+var API_URL = 'http://10.74.90.221:1337/api/v1/merchant';
 var PAGE_SIZE = 25;
-var PARAMS = '?apikey=' + API_KEY + '&page_limit=' + PAGE_SIZE;
+var PARAMS = '?page_size=5&current_page=1';
+
 var REQUEST_URL = API_URL + PARAMS;
 
 class ChifanApp extends Component {
@@ -41,7 +41,7 @@ class ChifanApp extends Component {
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData.movies),
+          dataSource: this.state.dataSource.cloneWithRows(responseData.merchants),
           loaded: true,
         });
       })
@@ -56,7 +56,7 @@ class ChifanApp extends Component {
     return (
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={this.renderMovie}
+        renderRow={this.renderMerchant}
         style={styles.listView}
       />
     );
@@ -66,21 +66,21 @@ class ChifanApp extends Component {
     return (
       <View style={styles.container}>
         <Text>
-          Loading movies...
+          Loading merchants...
         </Text>
       </View>
     );
   }
-  renderMovie(movie) {
+  renderMerchant(merchant) {
     return (
       <View style={styles.container}>
         <Image
-          source={{uri: movie.posters.thumbnail}}
+          source={{uri: merchant.img_url}}
           style={styles.thumbnail}
         />
         <View style={styles.rightContainer}>
-          <Text style={styles.title}>{movie.title}</Text>
-          <Text style={styles.year}>{movie.year}</Text>
+          <Text style={styles.title}>{merchant.name}</Text>
+          <Text style={styles.year}>{merchant.url}</Text>
         </View>
       </View>
     );
@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   thumbnail: {
-    width: 53,
-    height: 81,
+    width: 120,
+    height: 90,
   },
   listView: {
     paddingTop: 20,
