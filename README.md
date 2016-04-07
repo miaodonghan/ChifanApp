@@ -23,7 +23,7 @@ react_native run-android
 ### How to Debug
    Modified source code can be reloaded without fresh deployment
 #### iOS
-   Cmd + R will reload your updated code.
+   `Cmd + R` will reload your updated code.
 #### Android
   use `adb` tool to trigger debug menu. ``` $ANDROID_SDK/platform-tools/adb shell input keyevent 82```
   
