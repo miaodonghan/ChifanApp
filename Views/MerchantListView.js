@@ -16,7 +16,7 @@ var REQUEST_URL = API_URL + PARAMS;
 
 class MerchantListView extends Component {
 
-   constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       dataSource: new ListView.DataSource({
@@ -42,7 +42,7 @@ class MerchantListView extends Component {
       .done();
   }
 
-  render () {
+  render() {
     if (!this.state.loaded) {
       return this.renderLoadingView();
     }
@@ -52,7 +52,7 @@ class MerchantListView extends Component {
         dataSource={this.state.dataSource}
         renderRow={this.renderMerchant}
         style={styles.listView}
-      />
+        />
     );
   }
 
@@ -69,9 +69,9 @@ class MerchantListView extends Component {
     return (
       <View style={styles.container}>
         <Image
-          source={{uri: merchant.img_url}}
+          source={{ uri: merchant.img_url }}
           style={styles.thumbnail}
-        />
+          />
         <View style={styles.rightContainer}>
           <Text style={styles.title}>{merchant.name}</Text>
           <Text style={styles.year}>{merchant.url}</Text>

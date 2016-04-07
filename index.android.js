@@ -106,7 +106,7 @@ class ChifanApp extends Component {
   render() {
     return (
       <Navigator
-        initialRoute={{id: 1, }}
+        initialRoute={{ id: 1, }}
         renderScene={this._renderScene}
         configureScene={this._configureScene} />
     );
