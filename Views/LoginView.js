@@ -50,7 +50,6 @@ class LoginView extends Component {
 
   onSubmitPressed() {
     this.props.navigator.push({
-      title: "MerchantListView",
       component: MerchantListView,
       passProps: { username: this.state.username, password: this.state.password },
     });

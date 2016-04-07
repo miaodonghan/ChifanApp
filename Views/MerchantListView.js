@@ -8,8 +8,7 @@ import React, {
   View,
 } from 'react-native';
 
-var API_URL = 'http://10.74.90.221:1337/api/v1/merchant';
-var PAGE_SIZE = 25;
+var API_URL = 'http://10.74.126.39:1337/api/v1/merchant';
 var PARAMS = '?page_size=5&current_page=1';
 
 var REQUEST_URL = API_URL + PARAMS;
@@ -57,6 +56,7 @@ class MerchantListView extends Component {
   }
 
   renderLoadingView() {
+    console.log("loading");
     return (
       <View style={styles.container}>
         <Text>
@@ -65,6 +65,7 @@ class MerchantListView extends Component {
       </View>
     );
   }
+
   renderMerchant(merchant) {
     return (
       <View style={styles.container}>
