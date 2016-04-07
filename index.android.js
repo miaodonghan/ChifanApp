@@ -1,6 +1,6 @@
 'use strict';
-var React = require('react-native');
-var {
+
+import React, {
   AppRegistry,
   StyleSheet,
   Text,
@@ -8,11 +8,10 @@ var {
   Navigator,
   TouchableOpacity,
   Component,
-} = React;
+} from 'react-native';
 
-
-var LoginView = require('./Views/LoginView');
-var MerchantListView = require('./Views/MerchantListView');
+import LoginView from './Views/LoginView';
+import MerchantListView from './Views/MerchantListView';
 
 var SCREEN_WIDTH = require('Dimensions').get('window').width;
 var BaseConfig = Navigator.SceneConfigs.FloatFromRight;

@@ -1,8 +1,6 @@
 "use strict";
 
-var React = require("react-native");
-
-var {
+import React, {
   Component,
   StyleSheet,
   Text,
@@ -10,9 +8,9 @@ var {
   TouchableHighlight,
   TouchableOpacity,
   View,
-} = React;
+} from 'react-native';
 
-var MerchantListView = require("./MerchantListView");
+import MerchantListView from './MerchantListView';
 
 class LoginView extends Component {
 
