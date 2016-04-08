@@ -36,8 +36,9 @@ Codebase for GoldenClub mobile app written in [React Native](http://facebook.git
    ```
 
 ## How to Debug
-  - Update `API_HOST` in `Config/App.js`
-    > Note: Android emulator has to connect to an address that is externally visible (e.g. http://192.168.1.5), http://localhost will not connect; iOS emulator has no issues either way.
+  - Modify `API_HOST` in `Config/App.js`, using the address where your server is running.
+
+  > Note: Android emulator has to connect to an address that is externally visible (e.g. http://192.168.1.5), http://localhost will not connect; iOS emulator has no issues either way.
   - Modified source code can be reloaded without fresh deployment
 #### iOS
    `Cmd + R` will reload your updated code.
