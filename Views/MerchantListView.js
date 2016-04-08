@@ -48,7 +48,6 @@ var PARAMS = '?page_size=5&current_page=1';
 var REQUEST_URL = API_URL + PARAMS;
 
 class MerchantListView extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -56,6 +55,7 @@ class MerchantListView extends Component {
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
       loaded: false,
+      status: 'loading merchants ...'
     };
   }
 
@@ -72,7 +72,11 @@ class MerchantListView extends Component {
           loaded: true,
         });
       })
-      .done();
+      .catch((error) => {
+        this.setState({
+          status: error
+        });
+      });
   }
 
   render() {
@@ -94,7 +98,7 @@ class MerchantListView extends Component {
     return (
       <View style={styles.container}>
         <Text>
-          Loading merchants...
+          {this.state.status}
         </Text>
       </View>
     );

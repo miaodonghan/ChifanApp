@@ -22,21 +22,6 @@ var styles = StyleSheet.create({
   subheading: {
     color: "#cccccc"
   }
-});var styles = StyleSheet.create({
-  container: {
-    padding: 30,
-    marginTop: 65,
-    alignItems: "center"
-  },
-  heading: {
-    marginBottom: 20,
-    fontSize: 18,
-    textAlign: "center",
-    color: "#656565"
-  },
-  subheading: {
-    color: "#cccccc"
-  }
 });
 
 class MerchantDetailView extends Component {
@@ -63,8 +48,6 @@ class MerchantDetailView extends Component {
       </View>
     );
   }
-
 };
-
 
 module.exports = MerchantDetailView;
