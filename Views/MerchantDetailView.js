@@ -29,8 +29,6 @@ class MerchantDetailView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //username: this.props.username,
-      //password: this.props.password
       name: this.props.name,
       id: this.props.id
     };

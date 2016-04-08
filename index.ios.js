@@ -13,6 +13,8 @@ import React, {
 import LoginView from './Views/LoginView';
 import MerchantListView from './Views/MerchantListView';
 
+var styles = require('./styles/main');
+
 var SCREEN_WIDTH = require('Dimensions').get('window').width;
 var BaseConfig = Navigator.SceneConfigs.FloatFromRight;
 
@@ -35,7 +37,7 @@ var CustomSceneConfig = Object.assign({}, BaseConfig, {
 
 class ChifanApp extends Component {
   _renderScene(route, navigator) {
-    return <route.component navigator={navigator} />
+    return <route.component navigator={navigator} {...route.passProps} />
   }
 
   _configureScene(route) {
@@ -51,21 +53,5 @@ class ChifanApp extends Component {
     );
   }
 };
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    color: 'white',
-  },
-});
-
 
 AppRegistry.registerComponent('chifan', () => ChifanApp);
