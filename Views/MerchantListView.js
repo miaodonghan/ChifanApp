@@ -6,9 +6,41 @@ import React, {
   StyleSheet,
   Text,
   View,
+  TouchableHighlight,
 } from 'react-native';
 
 import Config from '../Config/App';
+import MerchantDetailView from './MerchantDetailView';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  rightContainer: {
+    flex: 1,
+  },
+  title: {
+    fontSize: 20,
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  year: {
+    textAlign: 'center',
+  },
+  thumbnail: {
+    width: 120,
+    height: 90,
+  },
+  listView: {
+    paddingTop: 20,
+    backgroundColor: '#F5FCFF',
+  },
+});
+
 
 var API_URL = Config.API_HOST + '/api/v2/merchant';
 var PARAMS = '?page_size=5&current_page=1';
@@ -51,9 +83,9 @@ class MerchantListView extends Component {
     return (
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={this.renderMerchant}
+        renderRow={this.renderRow.bind(this)}
         style={styles.listView}
-        />
+      />
     );
   }
 
@@ -68,49 +100,31 @@ class MerchantListView extends Component {
     );
   }
 
-  renderMerchant(merchant) {
+  pressRow(merchant) {
+    this.props.navigator.push({
+      component: MerchantDetailView,
+      passProps: { name: merchant.name, id: "merchant.id" },
+    });
+  }
+
+  renderRow(merchant) {
     return (
-      <View style={styles.container}>
-        <Image
-          source={{ uri: merchant.img_url }}
-          style={styles.thumbnail}
-          />
-        <View style={styles.rightContainer}>
-          <Text style={styles.title}>{merchant.name}</Text>
-          <Text style={styles.year}>{merchant.url}</Text>
+      <TouchableHighlight onPress={()=> this.pressRow(merchant)}>
+        <View style={styles.container}>
+          <Image
+            source={{ uri: merchant.img_url }}
+            style={styles.thumbnail}
+            />
+          <View style={styles.rightContainer}>
+            <Text style={styles.title}>{merchant.name}</Text>
+            <Text style={styles.year}>{merchant.url}</Text>
+          </View>
         </View>
-      </View>
+      </TouchableHighlight>
     );
   }
+
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  rightContainer: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  year: {
-    textAlign: 'center',
-  },
-  thumbnail: {
-    width: 120,
-    height: 90,
-  },
-  listView: {
-    paddingTop: 20,
-    backgroundColor: '#F5FCFF',
-  },
-});
 
 module.exports = MerchantListView;
