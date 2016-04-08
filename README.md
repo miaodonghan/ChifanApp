@@ -10,22 +10,25 @@ npm install
 ```
 ### Compile and deploy your application
 #### iOS
-```bash
-react_native run-ios
-```
+   ```bash
+   react_native run-ios
+   ```
 #### Android
-  Set Android SDK path first (put in your `.bashrc` in Linux or `bash_profile` in Mac)
-```  
-export ANDROID_HOME=/Users/donghan/Library/Android/sdk
-```
-  then
-```bash
-react_native run-android
-```
-Lastly, run following command if you are running on a real android device.
-```
-$ANDROID_SDK/platform-tools/adb reverse tcp:8081 tcp:8081
-```
+   - Set Android SDK path first (put in your `.bashrc` in Linux or `bash_profile` in Mac)
+   
+   ```  
+   export ANDROID_HOME=/Users/donghan/Library/Android/sdk
+   ```
+   - then
+   
+   ```bash
+   react_native run-android
+   ```
+   - Lastly, run following command if you are running on a real android device.
+   
+   ```
+   $ANDROID_SDK/platform-tools/adb reverse tcp:8081 tcp:8081
+   ```
 ## How to Debug
   - Modified source code can be reloaded without fresh deployment
 #### iOS
