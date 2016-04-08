@@ -22,6 +22,10 @@ export ANDROID_HOME=/Users/donghan/Library/Android/sdk
 ```bash
 react_native run-android
 ```
+Lastly, run following command if you are running on a real android device.
+```
+$ANDROID_SDK/platform-tools/adb reverse tcp:8081 tcp:8081
+```
 ## How to Debug
   - Modified source code can be reloaded without fresh deployment
 #### iOS
