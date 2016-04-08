@@ -8,7 +8,9 @@ import React, {
   View,
 } from 'react-native';
 
-var API_URL = 'http://10.74.126.39:1337/api/v1/merchant';
+import Config from '../Config/App';
+
+var API_URL = Config.API_HOST + '/api/v2/merchant';
 var PARAMS = '?page_size=5&current_page=1';
 
 var REQUEST_URL = API_URL + PARAMS;
