@@ -9,7 +9,7 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 
-import Config from '../Config/App';
+import Config from '../../Config/App';
 import MerchantDetailView from './MerchantDetailView';
 
 const styles = StyleSheet.create({

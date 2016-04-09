@@ -7,10 +7,11 @@ import React, {
   Navigator,
   TouchableOpacity,
   Component,
+  BackAndroid
 } from 'react-native';
 
-import LoginView from './Views/LoginView';
-import MerchantListView from './Views/MerchantListView';
+import LoginView from './views/android/LoginView';
+import MerchantListView from './views/android/MerchantListView';
 
 var styles = require('./styles/main');
 
@@ -36,7 +37,7 @@ var CustomSceneConfig = Object.assign({}, BaseConfig, {
 
 class ChifanApp extends Component {
   _renderScene(route, navigator) {
-    return <route.component navigator={navigator} {...route.passProps} />
+    return <route.component navigator={navigator} {...route.passProps} />;
   }
 
   _configureScene(route) {
@@ -48,10 +49,10 @@ class ChifanApp extends Component {
       <Navigator
         initialRoute={{ component: LoginView, }}
         renderScene={this._renderScene}
-        configureScene={this._configureScene} />
+        configureScene={this._configureScene}
+      />
     );
   }
 };
-
 
 AppRegistry.registerComponent('chifan', () => ChifanApp);
