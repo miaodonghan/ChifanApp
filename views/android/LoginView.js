@@ -12,9 +12,7 @@ import React, {
 
 import MerchantListView from './MerchantListView';
 import RegisterView from './RegisterView';
-
 import { Button } from 'react-native-material-design';
-
 
 var styles = StyleSheet.create({
   container: {
@@ -54,10 +52,10 @@ class LoginView extends Component {
             secureTextEntry={true}
             onChange={(event) => this.setState({ password: event.nativeEvent.text }) }
             value={this.state.password} />
-          <Button text="Sign In" raised={true} onPress={this.onSubmitPressed.bind(this)} />
+          <Button text="Sign In" raised={true} onPress={this.onSubmitPressed.bind(this) } />
         </View>
 
-        <Button text="Create an account" onPress={this.onRegisterPressed.bind(this)} />
+        <Button text="Create an account" onPress={this.onRegisterPressed.bind(this) } />
 
       </View>
     );

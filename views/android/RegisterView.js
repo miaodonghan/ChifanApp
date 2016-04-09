@@ -37,8 +37,8 @@ class RegisterView extends Component {
     };
 
     BackAndroid.addEventListener('hardwareBackPress', () => {
-        this.onBackPressed();
-        return true;
+      this.onBackPressed();
+      return true;
     });
   }
 
@@ -58,17 +58,17 @@ class RegisterView extends Component {
             secureTextEntry={true}
             onChange={(event) => this.setState({ password: event.nativeEvent.text }) }
             value={this.state.password} />
-           <TextInput
+          <TextInput
             placeholder="Confirm Password"
             secureTextEntry={true}
             onChange={(event) => this.setState({ password2: event.nativeEvent.text }) }
             value={this.state.password2} />
 
 
-          <Button text="Submit" raised={true} onPress={this.onSubmitPressed.bind(this)} />
+          <Button text="Submit" raised={true} onPress={this.onSubmitPressed.bind(this) } />
 
 
-          <Button text="Sign In" onPress={this.onBackPressed.bind(this)} />
+          <Button text="Sign In" onPress={this.onBackPressed.bind(this) } />
 
         </View>
       </View>
@@ -76,10 +76,10 @@ class RegisterView extends Component {
   }
 
   onSubmitPressed() {
-   // this.props.navigator.push({
-   //   component: MerchantListView,
-   //   passProps: { username: this.state.username, password: this.state.password },
-   //  });
+    // this.props.navigator.push({
+    //   component: MerchantListView,
+    //   passProps: { username: this.state.username, password: this.state.password },
+    //  });
   }
   onBackPressed() {
     this.props.navigator.pop();

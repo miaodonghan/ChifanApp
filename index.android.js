@@ -13,8 +13,6 @@ import React, {
 import LoginView from './views/android/LoginView';
 import MerchantListView from './views/android/MerchantListView';
 
-var styles = require('./styles/main');
-
 var SCREEN_WIDTH = require('Dimensions').get('window').width;
 var BaseConfig = Navigator.SceneConfigs.FloatFromRight;
 
