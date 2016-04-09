@@ -11,6 +11,8 @@ import React, {
 
 import Config from '../../Config/App';
 import MerchantDetailView from './MerchantDetailView';
+import { MKSpinner } from 'react-native-material-kit';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -18,7 +20,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+  },
+  spinContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   rightContainer: {
     flex: 1,
@@ -37,7 +43,6 @@ const styles = StyleSheet.create({
   },
   listView: {
     paddingTop: 20,
-    backgroundColor: '#F5FCFF',
   },
 });
 
@@ -55,7 +60,6 @@ class MerchantListView extends Component {
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
       loaded: false,
-      status: 'loading merchants ...'
     };
   }
 
@@ -87,19 +91,21 @@ class MerchantListView extends Component {
     return (
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={this.renderRow.bind(this)}
+        renderRow={this.renderRow.bind(this) }
         style={styles.listView}
-      />
+       />
     );
   }
 
   renderLoadingView() {
-    console.log("loading");
     return (
-      <View style={styles.container}>
-        <Text>
-          {this.state.status}
-        </Text>
+      <View style={styles.spinContainer}>
+        <View>
+          <MKSpinner />
+        </View>
+        <View>
+          <Text>{"\n"}Fetching Merchants ...</Text>
+        </View>
       </View>
     );
   }
@@ -107,13 +113,13 @@ class MerchantListView extends Component {
   pressRow(merchant) {
     this.props.navigator.push({
       component: MerchantDetailView,
-      passProps: { merchant: merchant},
+      passProps: { merchant: merchant },
     });
   }
 
   renderRow(merchant) {
     return (
-      <TouchableHighlight onPress={()=> this.pressRow(merchant)}>
+      <TouchableHighlight onPress={() => this.pressRow(merchant) }>
         <View style={styles.container}>
           <Image
             source={{ uri: merchant.img_url }}

@@ -7,27 +7,21 @@ import React, {
   View,
   Image,
   IntentAndroid,
-  BackAndroid
+  BackAndroid,
+  ScrollView,
 } from "react-native";
 
 import { Button, Card, COLOR, TYPO} from 'react-native-material-design';
 
-var styles = StyleSheet.create({
-  container: {
-    padding: 30,
-    marginTop: 65,
-    alignItems: "center"
-  },
-  heading: {
-    marginBottom: 20,
-    fontSize: 18,
-    textAlign: "center",
-    color: "#656565"
-  },
-  subheading: {
-    color: "#cccccc"
-  }
-});
+
+import {
+  MKButton,
+  MKColor,
+  MKIconToggle,
+  getTheme,
+} from 'react-native-material-kit';
+const theme = getTheme();
+const styles = require('./styles');
 
 class MerchantDetailView extends Component {
 
@@ -45,9 +39,24 @@ class MerchantDetailView extends Component {
   }
 
   render() {
-    return (
+    var base64Icon = 'http://www.getmdl.io/assets/demos/welcome_card.jpg';
+    var action = (<Text> My action</Text>);
+    var menu = (
+       <MKIconToggle
+        checked={true}
+        onCheckedChange={this._onIconChecked}
+        onPress={this._onIconClicked}
+        >
+        <Text pointerEvents="none"
+              style={styles.toggleTextOff}>Off</Text>
+        <Text state_checked={true}
+              pointerEvents="none"
+              style={[styles.toggleText, styles.toggleTextOn]}>On</Text>
+      </MKIconToggle>
+    );
 
-      <View>
+    return (
+      <ScrollView style={styles.scrollView}>
         <Card>
           <Card.Media
             image={<Image source={{uri: this.props.merchant.img_url}} />}
@@ -68,14 +77,30 @@ class MerchantDetailView extends Component {
             <Button text="MERCHANT WEBSITE" onPress={() => IntentAndroid.openURL('https://github.com/react-native-material-design/react-native-material-design') } />
           </Card.Actions>
         </Card>
-        <Card>
-          <Card.Body>
-            <Text>If you find any issues or potential improvements please submit an issue on the GitHub repository page.</Text>
-          </Card.Body>
-        </Card>
-        <Button text="Go to child component" />
 
-      </View>
+        <View style={styles.container}>
+        {/* Here the magic happens*/}
+          <View style={theme.cardStyle}>
+            <Image source={{uri: this.props.merchant.img_url}} style={theme.cardImageStyle}/>
+            <Text style={theme.cardTitleStyle}>Welcome</Text>
+            <View  // TextView padding not handled well on Android https://github.com/facebook/react-native/issues/3233
+              style={{
+                padding : 15,
+              }}
+              >
+              <Text style={[theme.cardContentStyle, {padding:0}]}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Mauris sagittis pellentesque lacus eleifend lacinia...
+              </Text>
+            </View>
+            <View style={theme.cardMenuStyle}>{menu}</View>
+            <View style={theme.cardActionStyle}>
+
+              <Text>My Action</Text>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
 
     );
   }

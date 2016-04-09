@@ -11,7 +11,7 @@ import React, {
   BackAndroid
 } from 'react-native';
 
-import { Button, Subheader } from 'react-native-material-design';
+import { MKColor, MKButton } from 'react-native-material-kit';
 
 import MerchantListView from './MerchantListView';
 
@@ -42,6 +42,13 @@ class RegisterView extends Component {
   }
 
   render() {
+
+    const RegisterButton = MKButton.coloredButton()
+      .withBackgroundColor(MKColor.Teal)
+      .withText('Create my account')
+      .withOnPress(this.onSubmitPressed.bind(this))
+      .build();
+
     return (
       <View style={styles.container}>
         <Text style={styles.title}>
@@ -61,8 +68,8 @@ class RegisterView extends Component {
           secureTextEntry={true}
           onChange={(event) => this.setState({ password2: event.nativeEvent.text }) }
           value={this.state.password2} />
-        <Button text="Submit" raised={true} onPress={this.onSubmitPressed.bind(this) } />
-        <Button text="Sign In" onPress={this.onBackPressed.bind(this) } />
+        <Text />
+        <RegisterButton />
       </View>
     );
   }

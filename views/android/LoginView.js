@@ -12,7 +12,7 @@ import React, {
 
 import MerchantListView from './MerchantListView';
 import RegisterView from './RegisterView';
-import { Button } from 'react-native-material-design';
+import { MKColor, MKButton } from 'react-native-material-kit';
 
 var styles = StyleSheet.create({
   container: {
@@ -36,6 +36,16 @@ class LoginView extends Component {
   }
 
   render() {
+    const SignInButton = MKButton.coloredButton()
+      .withBackgroundColor(MKColor.Teal)
+      .withText('Sign In')
+      .withOnPress(this.onSubmitPressed.bind(this))
+      .build();
+    const RegisterButton = MKButton.flatButton()
+      .withText('Create an account')
+      .withOnPress(this.onRegisterPressed.bind(this))
+      .build();
+
     return (
       <View style={styles.container}>
         <Text style={styles.title}>
@@ -51,11 +61,11 @@ class LoginView extends Component {
             secureTextEntry={true}
             onChange={(event) => this.setState({ password: event.nativeEvent.text }) }
             value={this.state.password} />
-          <Button text="Sign In" raised={true} onPress={this.onSubmitPressed.bind(this) } />
+          <Text></Text>
+          <SignInButton/>
+          <Text></Text>
+          <RegisterButton/>
         </View>
-
-        <Button text="Create an account" onPress={this.onRegisterPressed.bind(this) } />
-
       </View>
     );
   }
