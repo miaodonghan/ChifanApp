@@ -12,5 +12,5 @@ module.exports = React.StyleSheet.create({
     textAlign: 'center',
     margin: 10,
     color: 'white',
-  },
+  }
 });

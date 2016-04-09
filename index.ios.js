@@ -11,6 +11,8 @@ import React, {
 } from 'react-native';
 
 import LoginView from './Views/LoginView';
+import RegisterView from './Views/RegisterView';
+
 import MerchantListView from './Views/MerchantListView';
 
 var styles = require('./styles/main');
