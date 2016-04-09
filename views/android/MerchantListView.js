@@ -107,7 +107,7 @@ class MerchantListView extends Component {
   pressRow(merchant) {
     this.props.navigator.push({
       component: MerchantDetailView,
-      passProps: { name: merchant.name, id: merchant.id },
+      passProps: { merchant: merchant},
     });
   }
 

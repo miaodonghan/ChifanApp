@@ -17,7 +17,6 @@ import { Button } from 'react-native-material-design';
 var styles = StyleSheet.create({
   container: {
     padding: 30,
-    marginTop: 65,
     alignItems: "stretch"
   },
   title: {

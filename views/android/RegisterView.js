@@ -11,14 +11,13 @@ import React, {
   BackAndroid
 } from 'react-native';
 
-import { Button, Divider } from 'react-native-material-design';
+import { Button, Subheader } from 'react-native-material-design';
 
 import MerchantListView from './MerchantListView';
 
 var styles = StyleSheet.create({
   container: {
     padding: 30,
-    marginTop: 65,
     alignItems: "stretch"
   },
   title: {
@@ -48,29 +47,22 @@ class RegisterView extends Component {
         <Text style={styles.title}>
           Create an account with Golden Club
         </Text>
-        <View>
-          <TextInput
-            placeholder="Username"
-            onChange={(event) => this.setState({ username: event.nativeEvent.text }) }
-            value={this.state.username} />
-          <TextInput
-            placeholder="Password"
-            secureTextEntry={true}
-            onChange={(event) => this.setState({ password: event.nativeEvent.text }) }
-            value={this.state.password} />
-          <TextInput
-            placeholder="Confirm Password"
-            secureTextEntry={true}
-            onChange={(event) => this.setState({ password2: event.nativeEvent.text }) }
-            value={this.state.password2} />
-
-
-          <Button text="Submit" raised={true} onPress={this.onSubmitPressed.bind(this) } />
-
-
-          <Button text="Sign In" onPress={this.onBackPressed.bind(this) } />
-
-        </View>
+        <TextInput
+          placeholder="Username"
+          onChange={(event) => this.setState({ username: event.nativeEvent.text }) }
+          value={this.state.username} />
+        <TextInput
+          placeholder="Password"
+          secureTextEntry={true}
+          onChange={(event) => this.setState({ password: event.nativeEvent.text }) }
+          value={this.state.password} />
+        <TextInput
+          placeholder="Confirm Password"
+          secureTextEntry={true}
+          onChange={(event) => this.setState({ password2: event.nativeEvent.text }) }
+          value={this.state.password2} />
+        <Button text="Submit" raised={true} onPress={this.onSubmitPressed.bind(this) } />
+        <Button text="Sign In" onPress={this.onBackPressed.bind(this) } />
       </View>
     );
   }

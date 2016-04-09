@@ -1,5 +1,5 @@
 Config = {
-  API_HOST: 'http://localhost:1337',
+  API_HOST: 'http://104.194.125.248:1337',
 
 }
 
