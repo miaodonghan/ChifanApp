@@ -6,7 +6,7 @@ import React, {
   Text,
   View,
   Image,
-  IntentAndroid,
+  Linking,
   BackAndroid,
   ScrollView,
 } from "react-native";
@@ -51,14 +51,15 @@ class MerchantDetailView extends Component {
               {this.props.merchant.name}
             </Text>
             <Text style={[TYPO.paperSubhead, COLOR.paperGrey50]}>
-              {this.props.merchant.address1} {this.props.merchant.address2} {this.props.merchant.city}, {this.props.merchant.state} {this.props.merchant.zipcode}
+              {this.props.merchant.address1} {this.props.merchant.address2 + '\n'}
+              {this.props.merchant.city}, {this.props.merchant.state} {this.props.merchant.zipcode}
             </Text>
           </Card.Media>
           <Card.Body>
             <Text>{this.props.merchant.description}</Text>
           </Card.Body>
           <Card.Actions position="right">
-            <Button text="MERCHANT WEBSITE" onPress={() => IntentAndroid.openURL('https://github.com/react-native-material-design/react-native-material-design') } />
+            <Button text="MERCHANT WEBSITE" onPress={() => Linking.openURL('https://github.com/react-native-material-design/react-native-material-design') } />
           </Card.Actions>
         </Card>
       </ScrollView>
