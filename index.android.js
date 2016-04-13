@@ -13,6 +13,7 @@ import React, {
 
 import LoginView from './views/android/LoginView';
 import MerchantListView from './views/android/MerchantListView';
+import DrawerView from './views/android/DrawerView';
 
 var SCREEN_WIDTH = require('Dimensions').get('window').width;
 var BaseConfig = Navigator.SceneConfigs.FloatFromRight;
@@ -35,6 +36,15 @@ var CustomSceneConfig = Object.assign({}, BaseConfig, {
 });
 
 class ChifanApp extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      drawer: null,
+      navigator: null
+    };
+  }
+
   _renderScene(route, navigator) {
     return <route.component navigator={navigator} {...route.passProps} />;
   }
@@ -45,19 +55,20 @@ class ChifanApp extends Component {
 
   render() {
     var navigationView = (
-      <View style={{flex: 1, backgroundColor: '#fff'}}>
-        <Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>I'm in the Drawer!</Text>
-      </View>
+      <DrawerView />
     );
+
     return (
       <DrawerLayoutAndroid
         drawerWidth={300}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
-        renderNavigationView={() => navigationView}>
+        renderNavigationView={() => navigationView}
+        >
         <Navigator
           initialRoute={{ component: MerchantListView, }}
           renderScene={this._renderScene}
-          configureScene={this._configureScene}/>
+          configureScene={this._configureScene}
+          />
       </DrawerLayoutAndroid>
     );
 
