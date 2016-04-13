@@ -7,7 +7,8 @@ import React, {
   Navigator,
   TouchableOpacity,
   Component,
-  BackAndroid
+  BackAndroid,
+  DrawerLayoutAndroid
 } from 'react-native';
 
 import LoginView from './views/android/LoginView';
@@ -43,13 +44,23 @@ class ChifanApp extends Component {
   }
 
   render() {
-    return (
-      <Navigator
-        initialRoute={{ component: LoginView, }}
-        renderScene={this._renderScene}
-        configureScene={this._configureScene}
-      />
+    var navigationView = (
+      <View style={{flex: 1, backgroundColor: '#fff'}}>
+        <Text style={{margin: 10, fontSize: 15, textAlign: 'left'}}>I'm in the Drawer!</Text>
+      </View>
     );
+    return (
+      <DrawerLayoutAndroid
+        drawerWidth={300}
+        drawerPosition={DrawerLayoutAndroid.positions.Left}
+        renderNavigationView={() => navigationView}>
+        <Navigator
+          initialRoute={{ component: MerchantListView, }}
+          renderScene={this._renderScene}
+          configureScene={this._configureScene}/>
+      </DrawerLayoutAndroid>
+    );
+
   }
 };
 
