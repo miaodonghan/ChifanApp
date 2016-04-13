@@ -1,5 +1,5 @@
 # ChifanApp
-Codebase for GoldenClub mobile app written in [React Native](http://facebook.github.io/react-native/).
+Codebase for GoldenClub mobile app written in [React Native](http://facebook.github.io/react-native/). Please note that the code currently only supports Android. **Do not try to debug on iOS, it won't work.**
 
 ## Setting things up
 - Mac OS and XCode are required for iOS development; Android SDK is required for Android development.
