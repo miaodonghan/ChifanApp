@@ -4,21 +4,9 @@ import { Avatar, Drawer, Divider, COLOR, TYPO } from 'react-native-material-desi
 
 export default class DrawerView extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      route: null,
-    }
-  }
-
-  changeScene = (path, name) => {
-    const { drawer, navigator } = this.context;
-
-    this.setState({
-      route: path
-    });
-    navigator.to(path, name);
-    drawer.closeDrawer();
+  changeScene(name) {
+    console.log(this.refs);
+    this.refs["navigator"].push({name: name})
   };
 
   render() {
@@ -38,7 +26,7 @@ export default class DrawerView extends Component {
             icon: 'home',
             value: 'Welcome',
             active: !route || route === 'welcome',
-            onPress: () => this.changeScene('welcome'),
+            onPress: this.changeScene.bind(this,'login'),
           }]}
           />
 

@@ -8,12 +8,16 @@ import React, {
   TouchableOpacity,
   Component,
   BackAndroid,
-  DrawerLayoutAndroid
+  DrawerLayoutAndroid,
+  PropTypes,
+  Image
 } from 'react-native';
 
+import { Avatar, Drawer, Divider, COLOR, TYPO } from 'react-native-material-design';
+
 import LoginView from './views/android/LoginView';
+import RegisterView from './views/android/RegisterView';
 import MerchantListView from './views/android/MerchantListView';
-import DrawerView from './views/android/DrawerView';
 
 var SCREEN_WIDTH = require('Dimensions').get('window').width;
 var BaseConfig = Navigator.SceneConfigs.FloatFromRight;
@@ -46,16 +50,63 @@ class ChifanApp extends Component {
   }
 
   _renderScene(route, navigator) {
-    return <route.component navigator={navigator} {...route.passProps} />;
+    if (route.name === 'login') {
+      return <LoginView navigator={navigator} refs={this.refs} {...route.passProps} />;
+    } else if (route.name === 'MerchantList') {
+      return <MerchantListView navigator={navigator} refs={this.refs} {...route.passProps} />;
+    } else if (route.name === 'register') {
+      return <RegisterView navigator={navigator} refs={this.refs} {...route.passProps} />;
+
+    }
   }
 
   _configureScene(route) {
     return CustomSceneConfig;
   }
 
+  navigateTo(name) {
+    console.log(this.refs);
+    this.refs["navigator"].push({ name: name })
+    this.refs['drawer'].closeDrawer();
+  };
+
   render() {
+    const { route } = this.state;
+
     var navigationView = (
-      <DrawerView />
+      <Drawer theme='light'>
+        <Drawer.Header image={<Image source={require('./img/nav.jpg') } />}>
+          <View style={styles.header}>
+            <Avatar size={80} image={<Image source={{ uri: "http://facebook.github.io/react-native/img/opengraph.png?2" }}/>} />
+            <Text style={[styles.text, COLOR.paperGrey50, TYPO.paperFontSubhead]}>Golden Club Member</Text>
+          </View>
+        </Drawer.Header>
+
+        <Drawer.Section
+          items={[{
+            icon: 'home',
+            value: 'Login',
+            active: !route || route === 'login',
+            onPress: this.navigateTo.bind(this, 'login'),
+          }]}
+          />
+
+        <Drawer.Section
+          title="Components"
+          items={[{
+            icon: 'face',
+            value: 'Avatars',
+            active: route === 'avatars',
+            onPress: () => this.navigateTo('avatars'),
+          },
+            {
+              icon: 'check-box',
+              value: 'Checkboxes',
+              active: route === 'checkboxes',
+              onPress: () => this.navigateTo('checkboxes'),
+            }]}
+          />
+      </Drawer>
     );
 
     return (
@@ -63,15 +114,26 @@ class ChifanApp extends Component {
         drawerWidth={300}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
         renderNavigationView={() => navigationView}
+        ref='drawer'
         >
         <Navigator
-          initialRoute={{ component: MerchantListView, }}
+          initialRoute={{ name: 'MerchantList' }}
           renderScene={this._renderScene}
           configureScene={this._configureScene}
+          ref='navigator'
           />
       </DrawerLayoutAndroid>
     );
 
+  }
+};
+
+const styles = {
+  header: {
+    paddingTop: 16
+  },
+  text: {
+    marginTop: 20
   }
 };
 
