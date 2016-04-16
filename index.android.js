@@ -65,9 +65,9 @@ class ChifanApp extends Component {
   }
 
   navigateTo(name) {
-    console.log(this.refs);
-    this.refs["navigator"].push({ name: name })
-    this.refs['drawer'].closeDrawer();
+        this.refs['drawer'].closeDrawer();
+
+    this.refs["navigator"].resetTo({ name: name })
   };
 
   render() {
@@ -86,7 +86,6 @@ class ChifanApp extends Component {
           items={[{
             icon: 'home',
             value: 'Login',
-            active: !route || route === 'login',
             onPress: this.navigateTo.bind(this, 'login'),
           }]}
           />
@@ -95,16 +94,10 @@ class ChifanApp extends Component {
           title="Components"
           items={[{
             icon: 'face',
-            value: 'Avatars',
-            active: route === 'avatars',
-            onPress: () => this.navigateTo('avatars'),
-          },
-            {
-              icon: 'check-box',
-              value: 'Checkboxes',
-              active: route === 'checkboxes',
-              onPress: () => this.navigateTo('checkboxes'),
-            }]}
+            value: 'Merchants',
+            onPress: this.navigateTo.bind(this, 'MerchantList'),
+          }
+          ]}
           />
       </Drawer>
     );
