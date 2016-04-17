@@ -18,6 +18,7 @@ import { Avatar, Drawer, Divider, COLOR, TYPO } from 'react-native-material-desi
 import LoginView from './views/android/LoginView';
 import RegisterView from './views/android/RegisterView';
 import MerchantListView from './views/android/MerchantListView';
+import MerchantDetailView from './views/android/MerchantDetailView';
 
 var SCREEN_WIDTH = require('Dimensions').get('window').width;
 var BaseConfig = Navigator.SceneConfigs.FloatFromRight;
@@ -50,12 +51,15 @@ class ChifanApp extends Component {
   }
 
   _renderScene(route, navigator) {
-    if (route.name === 'login') {
-      return <LoginView navigator={navigator} refs={this.refs} {...route.passProps} />;
-    } else if (route.name === 'MerchantList') {
-      return <MerchantListView navigator={navigator} refs={this.refs} {...route.passProps} />;
-    } else if (route.name === 'register') {
-      return <RegisterView navigator={navigator} refs={this.refs} {...route.passProps} />; x
+    switch (route.name) {
+      case 'login':
+        return <LoginView navigator={navigator} refs={this.refs} {...route.passProps} />;
+      case 'MerchantList':
+        return <MerchantListView navigator={navigator} refs={this.refs} {...route.passProps} />;
+      case 'register':
+        return <RegisterView navigator={navigator} refs={this.refs} {...route.passProps} />;
+      case 'MerchantDetail':
+        return <MerchantDetailView navigator={navigator} refs={this.refs} {...route.passProps} />;
     }
   }
 
@@ -64,9 +68,8 @@ class ChifanApp extends Component {
   }
 
   navigateTo(name) {
+    this.refs["navigator"].resetTo({ name: name });
     this.refs['drawer'].closeDrawer();
-
-    this.refs["navigator"].resetTo({ name: name })
   };
 
   render() {
@@ -84,12 +87,12 @@ class ChifanApp extends Component {
         <Drawer.Section
           title="Account"
           items={[{
-            icon: 'home',
+            icon: 'fingerprint',
             value: 'Login',
             onPress: this.navigateTo.bind(this, 'login'),
           },
             {
-              icon: 'home',
+              icon: 'face',
               value: 'Create an account',
               onPress: this.navigateTo.bind(this, 'register'),
             }
@@ -99,7 +102,7 @@ class ChifanApp extends Component {
         <Drawer.Section
           title="Components"
           items={[{
-            icon: 'face',
+            icon: 'list',
             value: 'Merchants',
             onPress: this.navigateTo.bind(this, 'MerchantList'),
           }

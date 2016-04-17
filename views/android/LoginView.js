@@ -66,7 +66,7 @@ class LoginView extends Component {
 
   onSubmitPressed() {
     this.props.navigator.push({
-      name: 'merchant_list',
+      name: 'MerchantList',
       passProps: { username: this.state.username, password: this.state.password },
     });
   }

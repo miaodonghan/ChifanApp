@@ -1,6 +1,6 @@
-Config = {
+config = {
   API_HOST: 'https://www.goldenclubapp.com',
 
 }
 
-module.exports = Config;
+module.exports = config;

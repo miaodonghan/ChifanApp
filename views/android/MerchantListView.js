@@ -9,7 +9,7 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 
-import Config from '../../config/App';
+import config from '../../config/App';
 import MerchantDetailView from './MerchantDetailView';
 import { MKSpinner } from 'react-native-material-kit';
 
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 });
 
 
-var API_URL = Config.API_HOST + '/api/v2/merchant';
+var API_URL = config.API_HOST + '/api/v2/merchant';
 var PARAMS = '?page_size=5&current_page=1';
 
 var REQUEST_URL = API_URL + PARAMS;
@@ -60,6 +60,7 @@ class MerchantListView extends Component {
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
       loaded: false,
+      status: 'Fetching merchants ...'
     };
   }
 
@@ -72,6 +73,12 @@ class MerchantListView extends Component {
     fetch(REQUEST_URL)
       .then((response) => response.json())
       .then((responseData) => {
+        if(responseData.total === 0) {
+          this.setState({
+            status: 'No Merchant returned.'
+          });
+          return;
+        }
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(responseData.merchants),
           loaded: true,
@@ -107,7 +114,7 @@ class MerchantListView extends Component {
           <MKSpinner />
         </View>
         <View>
-          <Text>{"\n"}Fetching Merchants ...</Text>
+          <Text>{"\n"}{this.state.status}</Text>
         </View>
       </View>
     );
@@ -115,7 +122,7 @@ class MerchantListView extends Component {
 
   pressRow(merchant) {
     this.props.navigator.push({
-      component: MerchantDetailView,
+      name: 'MerchantDetail',
       passProps: { merchant: merchant },
     });
   }
