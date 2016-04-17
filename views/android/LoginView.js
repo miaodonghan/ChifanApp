@@ -41,10 +41,6 @@ class LoginView extends Component {
       .withText('Sign In')
       .withOnPress(this.onSubmitPressed.bind(this))
       .build();
-    const RegisterButton = MKButton.flatButton()
-      .withText('Create an account')
-      .withOnPress(this.onRegisterPressed.bind(this))
-      .build();
 
     return (
       <View style={styles.container}>
@@ -63,8 +59,6 @@ class LoginView extends Component {
             value={this.state.password} />
           <Text></Text>
           <SignInButton/>
-          <Text></Text>
-          <RegisterButton/>
         </View>
       </View>
     );
@@ -76,11 +70,7 @@ class LoginView extends Component {
       passProps: { username: this.state.username, password: this.state.password },
     });
   }
-  onRegisterPressed() {
-    this.props.navigator.push({
-      name: 'register',
-    });
-  }
+
 };
 
 

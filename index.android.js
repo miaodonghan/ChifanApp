@@ -55,8 +55,7 @@ class ChifanApp extends Component {
     } else if (route.name === 'MerchantList') {
       return <MerchantListView navigator={navigator} refs={this.refs} {...route.passProps} />;
     } else if (route.name === 'register') {
-      return <RegisterView navigator={navigator} refs={this.refs} {...route.passProps} />;
-
+      return <RegisterView navigator={navigator} refs={this.refs} {...route.passProps} />; x
     }
   }
 
@@ -65,7 +64,7 @@ class ChifanApp extends Component {
   }
 
   navigateTo(name) {
-        this.refs['drawer'].closeDrawer();
+    this.refs['drawer'].closeDrawer();
 
     this.refs["navigator"].resetTo({ name: name })
   };
@@ -83,11 +82,18 @@ class ChifanApp extends Component {
         </Drawer.Header>
 
         <Drawer.Section
+          title="Account"
           items={[{
             icon: 'home',
             value: 'Login',
             onPress: this.navigateTo.bind(this, 'login'),
-          }]}
+          },
+            {
+              icon: 'home',
+              value: 'Create an account',
+              onPress: this.navigateTo.bind(this, 'register'),
+            }
+          ]}
           />
 
         <Drawer.Section

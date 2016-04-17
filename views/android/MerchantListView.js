@@ -68,6 +68,7 @@ class MerchantListView extends Component {
   }
 
   fetchData() {
+    console.log(REQUEST_URL);
     fetch(REQUEST_URL)
       .then((response) => response.json())
       .then((responseData) => {
@@ -75,11 +76,13 @@ class MerchantListView extends Component {
           dataSource: this.state.dataSource.cloneWithRows(responseData.merchants),
           loaded: true,
         });
+        console.log(responseData.merchants);
       })
       .catch((error) => {
         this.setState({
           status: error
         });
+        console.log(error);
       });
   }
 
@@ -93,7 +96,7 @@ class MerchantListView extends Component {
         dataSource={this.state.dataSource}
         renderRow={this.renderRow.bind(this) }
         style={styles.listView}
-       />
+        />
     );
   }
 
