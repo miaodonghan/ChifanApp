@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "react": "^0.14.8",
-    "react-native": "^0.24.0-rc5",
+    "react-native": "^0.24.0",
     "react-native-material-design": "^0.3.3",
     "react-native-material-kit": "^0.3.1"
   }
