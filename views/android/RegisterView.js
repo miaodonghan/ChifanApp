@@ -55,9 +55,11 @@ class RegisterView extends Component {
           Create an account with Golden Club
         </Text>
         <TextInput
-          placeholder="Username"
-          onChange={(event) => this.setState({ username: event.nativeEvent.text }) }
-          value={this.state.username} />
+          placeholder="Email"
+          keyboardType='email-address'
+
+          onChange={(event) => this.setState({ email: event.nativeEvent.text }) }
+          value={this.state.email} />
         <TextInput
           placeholder="Password"
           secureTextEntry={true}
@@ -77,7 +79,7 @@ class RegisterView extends Component {
   onSubmitPressed() {
     // this.props.navigator.push({
     //   component: MerchantListView,
-    //   passProps: { username: this.state.username, password: this.state.password },
+    //   passProps: { email: this.state.email, password: this.state.password },
     //  });
   }
   onBackPressed() {

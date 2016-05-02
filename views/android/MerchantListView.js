@@ -9,7 +9,7 @@ import React, {
   TouchableHighlight,
 } from 'react-native';
 
-import config from '../../config/App';
+import config from '../../src/config';
 import MerchantDetailView from './MerchantDetailView';
 import { MKSpinner } from 'react-native-material-kit';
 

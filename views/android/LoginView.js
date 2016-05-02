@@ -8,11 +8,13 @@ import React, {
   TouchableHighlight,
   TouchableOpacity,
   View,
+  AsyncStorage
 } from 'react-native';
 
 import MerchantListView from './MerchantListView';
 import RegisterView from './RegisterView';
 import { MKColor, MKButton } from 'react-native-material-kit';
+import config from '../../src/config';
 
 var styles = StyleSheet.create({
   container: {
@@ -49,9 +51,10 @@ class LoginView extends Component {
         </Text>
         <View>
           <TextInput
-            placeholder="Username"
-            onChange={(event) => this.setState({ username: event.nativeEvent.text }) }
-            value={this.state.username} />
+            keyboardType='email-address'
+            placeholder="Email"
+            onChange={(event) => this.setState({ email: event.nativeEvent.text }) }
+            value={this.state.email} />
           <TextInput
             placeholder="Password"
             secureTextEntry={true}
@@ -65,9 +68,34 @@ class LoginView extends Component {
   }
 
   onSubmitPressed() {
-    this.props.navigator.push({
-      name: 'MerchantList',
-      passProps: { username: this.state.username, password: this.state.password },
+    var LOGIN_ENDPOINT = config.API_HOST + '/api/v1/auth/login';
+    console.log(LOGIN_ENDPOINT);
+    
+    fetch(LOGIN_ENDPOINT, {
+      method: 'post',
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password
+      })
+    })
+    .then(function(response){      
+      if (response.status != 200)
+        return;
+        
+      response.json().then(function(jsonResponse){
+        console.log(jsonResponse.token);
+        console.log(jsonResponse.expires);
+        AsyncStorage.setItem('token', jsonResponse.token);
+        AsyncStorage.setItem('expires', jsonResponse.expires);
+        // redirect to merchant list page after successfully logged in.
+        this.props.navigator.push({
+          name: 'MerchantList',
+          passProps: { email: this.state.email, password: this.state.password },
+        });
+      });
+    })
+    .catch(function(err){
+      console.log(err);
     });
   }
 

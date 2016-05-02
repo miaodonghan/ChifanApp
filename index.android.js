@@ -91,11 +91,11 @@ class ChifanApp extends Component {
             value: 'Login',
             onPress: this.navigateTo.bind(this, 'login'),
           },
-            {
-              icon: 'face',
-              value: 'Create an account',
-              onPress: this.navigateTo.bind(this, 'register'),
-            }
+          {
+            icon: 'face',
+            value: 'Create an account',
+            onPress: this.navigateTo.bind(this, 'register'),
+          }
           ]}
           />
 
