@@ -115,10 +115,9 @@ class ChifanApp extends Component {
       <DrawerLayoutAndroid
         drawerWidth={300}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
-        renderNavigationView={() => {
-          // use different logic based on user status. guest/authenticated.
-          return navigationView;
-        } }
+        renderNavigationView={() => 
+           navigationView
+        }
         ref={(c) => this.drawer = c}
         >
         <Navigator

@@ -12,10 +12,11 @@ import React, {
   ToastAndroid
 } from 'react-native';
 
+import { MKColor, MKButton } from 'react-native-material-kit';
+
+import config from '../../src/config';
 import MerchantListView from './MerchantListView';
 import RegisterView from './RegisterView';
-import { MKColor, MKButton } from 'react-native-material-kit';
-import config from '../../src/config';
 
 var styles = StyleSheet.create({
   container: {
@@ -31,6 +32,10 @@ var styles = StyleSheet.create({
 class LoginView extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      email: null,
+      password: null
+    }
   }
 
   render() {
@@ -63,10 +68,8 @@ class LoginView extends Component {
     );
   }
 
-  onSubmitPressed() {
+  onSubmitPressed() {      
     var LOGIN_ENDPOINT = config.API_HOST + '/api/v1/auth/login';
-
-
     fetch(LOGIN_ENDPOINT, {
       method: 'post',
       body: JSON.stringify({
@@ -84,19 +87,14 @@ class LoginView extends Component {
         }
 
         response.json().then(function(jsonResponse) {
-          console.log(jsonResponse.token);
-          console.log(jsonResponse.expires);
-          AsyncStorage.setItem('token', jsonResponse.token);
-          AsyncStorage.setItem('expires', jsonResponse.expires);
-
-          // redirect to merchant list page after successfully logged in.
-          this.props.navigator.push({
-            name: 'MerchantList',
-            passProps: { email: this.state.email, password: this.state.password },
-          });
-          // redraw navigation view after successfully logged in.
-          this.props.drawer.props.renderNavigationView();
-
+          AsyncStorage.setItem('token', String(jsonResponse.token));
+          AsyncStorage.setItem('expires', String(jsonResponse.expires));
+          AsyncStorage.setItem('authenticated', 'true');
+        });
+        // redirect to merchant list page after successfully logged in.
+        this.props.navigator.push({
+          name: 'MerchantList',
+          passProps: { email: this.state.email, password: this.state.password },
         });
       })
       .catch(function(err) {
