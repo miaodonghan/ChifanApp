@@ -53,13 +53,13 @@ class ChifanApp extends Component {
   _renderScene(route, navigator) {
     switch (route.name) {
       case 'login':
-        return <LoginView navigator={navigator} refs={this.refs} {...route.passProps} />;
+        return <LoginView navigator={navigator} drawer={this.drawer} {...route.passProps} />;
       case 'MerchantList':
-        return <MerchantListView navigator={navigator} refs={this.refs} {...route.passProps} />;
+        return <MerchantListView navigator={navigator}  {...route.passProps} />;
       case 'register':
-        return <RegisterView navigator={navigator} refs={this.refs} {...route.passProps} />;
+        return <RegisterView navigator={navigator} {...route.passProps} />;
       case 'MerchantDetail':
-        return <MerchantDetailView navigator={navigator} refs={this.refs} {...route.passProps} />;
+        return <MerchantDetailView navigator={navigator} {...route.passProps} />;
     }
   }
 
@@ -68,8 +68,8 @@ class ChifanApp extends Component {
   }
 
   navigateTo(name) {
-    this.refs["navigator"].resetTo({ name: name });
-    this.refs['drawer'].closeDrawer();
+    this.navigator.resetTo({ name: name });
+    this.drawer.closeDrawer();
   };
 
   render() {
@@ -91,11 +91,11 @@ class ChifanApp extends Component {
             value: 'Login',
             onPress: this.navigateTo.bind(this, 'login'),
           },
-          {
-            icon: 'face',
-            value: 'Create an account',
-            onPress: this.navigateTo.bind(this, 'register'),
-          }
+            {
+              icon: 'face',
+              value: 'Create an account',
+              onPress: this.navigateTo.bind(this, 'register'),
+            }
           ]}
           />
 
@@ -115,14 +115,17 @@ class ChifanApp extends Component {
       <DrawerLayoutAndroid
         drawerWidth={300}
         drawerPosition={DrawerLayoutAndroid.positions.Left}
-        renderNavigationView={() => navigationView}
-        ref='drawer'
+        renderNavigationView={() => {
+          // use different logic based on user status. guest/authenticated.
+          return navigationView;
+        } }
+        ref={(c) => this.drawer = c}
         >
         <Navigator
           initialRoute={{ name: 'MerchantList' }}
-          renderScene={this._renderScene}
+          renderScene={this._renderScene.bind(this) }
           configureScene={this._configureScene}
-          ref='navigator'
+          ref={(c) => this.navigator = c}
           />
       </DrawerLayoutAndroid>
     );

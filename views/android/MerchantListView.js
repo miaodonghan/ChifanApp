@@ -83,7 +83,7 @@ class MerchantListView extends Component {
           dataSource: this.state.dataSource.cloneWithRows(responseData.merchants),
           loaded: true,
         });
-        console.log(responseData.merchants);
+       // console.log(responseData.merchants);
       })
       .catch((error) => {
         this.setState({

@@ -29,26 +29,21 @@ var styles = StyleSheet.create({
 });
 
 class LoginView extends Component {
-
   constructor(props) {
     super(props);
-    this.state = {
-      username: "",
-      password: ""
-    };
   }
 
   render() {
-    const SignInButton = MKButton.coloredButton()
+    const LogInButton = MKButton.coloredButton()
       .withBackgroundColor(MKColor.Teal)
-      .withText('Sign In')
+      .withText('Log In')
       .withOnPress(this.onSubmitPressed.bind(this))
       .build();
 
     return (
       <View style={styles.container}>
         <Text style={styles.title}>
-          Sign In
+          Log In
         </Text>
         <View>
           <TextInput
@@ -62,7 +57,7 @@ class LoginView extends Component {
             onChange={(event) => this.setState({ password: event.nativeEvent.text }) }
             value={this.state.password} />
           <Text></Text>
-          <SignInButton/>
+          <LogInButton/>
         </View>
       </View>
     );
@@ -70,6 +65,8 @@ class LoginView extends Component {
 
   onSubmitPressed() {
     var LOGIN_ENDPOINT = config.API_HOST + '/api/v1/auth/login';
+
+
     fetch(LOGIN_ENDPOINT, {
       method: 'post',
       body: JSON.stringify({
@@ -97,6 +94,9 @@ class LoginView extends Component {
             name: 'MerchantList',
             passProps: { email: this.state.email, password: this.state.password },
           });
+          // redraw navigation view after successfully logged in.
+          this.props.drawer.props.renderNavigationView();
+
         });
       })
       .catch(function(err) {
