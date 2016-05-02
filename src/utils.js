@@ -5,5 +5,7 @@ import React, {
 } from 'react-native';
 
 
+module.exports = {
 
-module.exports = utils;
+
+};

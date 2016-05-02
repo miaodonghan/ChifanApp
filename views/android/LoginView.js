@@ -8,7 +8,8 @@ import React, {
   TouchableHighlight,
   TouchableOpacity,
   View,
-  AsyncStorage
+  AsyncStorage,
+  ToastAndroid
 } from 'react-native';
 
 import MerchantListView from './MerchantListView';
@@ -69,8 +70,6 @@ class LoginView extends Component {
 
   onSubmitPressed() {
     var LOGIN_ENDPOINT = config.API_HOST + '/api/v1/auth/login';
-    console.log(LOGIN_ENDPOINT);
-    
     fetch(LOGIN_ENDPOINT, {
       method: 'post',
       body: JSON.stringify({
@@ -78,28 +77,33 @@ class LoginView extends Component {
         password: this.state.password
       })
     })
-    .then(function(response){      
-      if (response.status != 200)
-        return;
-        
-      response.json().then(function(jsonResponse){
-        console.log(jsonResponse.token);
-        console.log(jsonResponse.expires);
-        AsyncStorage.setItem('token', jsonResponse.token);
-        AsyncStorage.setItem('expires', jsonResponse.expires);
-        // redirect to merchant list page after successfully logged in.
-        this.props.navigator.push({
-          name: 'MerchantList',
-          passProps: { email: this.state.email, password: this.state.password },
+      .then(function(response) {
+        if (response.status == 403) {
+          ToastAndroid.show('Authentication failed. Incorrect email or password.', ToastAndroid.SHORT);
+          return;
+        } else if (response.status != 200) {
+          ToastAndroid.show('Error code ' + response.status, ToastAndroid.SHORT);
+          return;
+        }
+
+        response.json().then(function(jsonResponse) {
+          console.log(jsonResponse.token);
+          console.log(jsonResponse.expires);
+          AsyncStorage.setItem('token', jsonResponse.token);
+          AsyncStorage.setItem('expires', jsonResponse.expires);
+
+          // redirect to merchant list page after successfully logged in.
+          this.props.navigator.push({
+            name: 'MerchantList',
+            passProps: { email: this.state.email, password: this.state.password },
+          });
         });
+      })
+      .catch(function(err) {
+        ToastAndroid.show('Error code ' + response.status, ToastAndroid.SHORT);
       });
-    })
-    .catch(function(err){
-      console.log(err);
-    });
   }
 
 };
-
 
 module.exports = LoginView;
