@@ -1,14 +1,16 @@
 "use strict";
 
 import React, {
-  Component,
+  Component
+} from "react";
+
+import {
   StyleSheet,
   Text,
   View,
   Image,
   BackAndroid,
 } from "react-native";
-
 
 class CheckinListView extends Component {
 

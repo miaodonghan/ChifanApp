@@ -1,4 +1,9 @@
-import React, { Component, PropTypes, View, Text, Image } from 'react-native';
+
+import React, {
+  Component
+} from "react";
+
+import {PropTypes, View, Text, Image } from 'react-native';
 
 import { Avatar, Drawer, Divider, COLOR, TYPO } from 'react-native-material-design';
 

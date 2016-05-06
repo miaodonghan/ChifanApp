@@ -1,6 +1,10 @@
-import React, {
+
+import React,{
+  Component
+} from "react";
+
+import {
   AppRegistry,
-  Component,
   Image,
   ListView,
   StyleSheet,
